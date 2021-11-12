@@ -7,6 +7,14 @@ lazy val gamenight =
   project
     .in(file("."))
     .settings(projectSettings)
+    .settings(
+      libraryDependencies ++= Seq(
+        library.catsCore,
+        library.scalaCheck,
+        library.scalaTest,
+        library.scalaTestPlus
+      )
+    )
 
 /**
  * Libraries
@@ -14,10 +22,21 @@ lazy val gamenight =
 lazy val library =
   new {
     object Version {
-      val cats = "2.6.1"
+      val cats          = "2.6.1"
+      val scalaCheck    = "1.15.4"
+      val scalaTest     = "3.2.10"
+      val scalaTestPlus = "3.2.10.0"
     }
     val catsCore             = "org.typelevel"               %% "cats-core"                % Version.cats
-}
+
+    /**
+     * Testing-only
+     */
+
+    val scalaCheck           = "org.scalacheck"              %% "scalacheck"               % Version.scalaCheck
+    val scalaTest            = "org.scalatest"               %% "scalatest"                % Version.scalaTest
+    val scalaTestPlus        = "org.scalatestplus"           %% "scalacheck-1-15"          % Version.scalaTestPlus
+  }
 
 lazy val projectSettings = commonSettings
 
