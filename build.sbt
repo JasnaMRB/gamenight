@@ -10,6 +10,10 @@ lazy val gamenight =
     .settings(
       libraryDependencies ++= Seq(
         library.catsCore,
+        library.refinedCats,
+        library.refinedCore,
+        library.refinedPureConfig,
+        library.refinedScalaCheck,
         library.scalaCheck,
         library.scalaTest,
         library.scalaTestPlus
@@ -23,19 +27,19 @@ lazy val library =
   new {
     object Version {
       val cats          = "2.6.1"
+      val refined       = "0.9.27"
       val scalaCheck    = "1.15.4"
       val scalaTest     = "3.2.10"
       val scalaTestPlus = "3.2.10.0"
     }
     val catsCore             = "org.typelevel"               %% "cats-core"                % Version.cats
-
-    /**
-     * Testing-only
-     */
-
     val scalaCheck           = "org.scalacheck"              %% "scalacheck"               % Version.scalaCheck
     val scalaTest            = "org.scalatest"               %% "scalatest"                % Version.scalaTest
     val scalaTestPlus        = "org.scalatestplus"           %% "scalacheck-1-15"          % Version.scalaTestPlus
+    val refinedCore          = "eu.timepit"                  %% "refined"                  % Version.refined
+    val refinedCats          = "eu.timepit"                  %% "refined-cats"             % Version.refined
+    val refinedPureConfig    = "eu.timepit"                  %% "refined-pureconfig"       % Version.refined
+    val refinedScalaCheck    = "eu.timepit"                  %% "refined-scalacheck"       % Version.refined
   }
 
 lazy val projectSettings = commonSettings
@@ -45,7 +49,6 @@ lazy val commonSettings =
     name := "gamenight",
     version := "0.1",
     scalaVersion := "2.13.7",
-    idePackagePrefix := Some("me.jasna.gamenight"),
     scalacOptions ++= Seq(
       "-deprecation",
       "-explaintypes",
